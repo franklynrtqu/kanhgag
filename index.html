@@ -1,8 +1,59 @@
-<HTML>
-  <HEAD>
-    <TITLE>UMA INTRODUÇÃO A GRAMÁTICA KAINGANG</TITLE>
-  </HEAD>
-  <BODY>
-    TESTE
-  </BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <title>Read and Lisen</title>
+</head>
+<body>
+  <div id="word-container"></div>
+  
+  <audio id="audio" style="display:none" controls>    
+    <source src="" type="audio/ogg">    
+  </audio>
+
+  <script>
+  
+    var text = 'Ã mỹ há? Inh jyjy vỹ tỹ jótiti nĩ, jo ã tũ ti?';
+    
+    $(document).ready(function(){      
+    	var textParsed = text.split(" ");
+
+      console.log(textParsed);
+    	
+    	textParsed.forEach((word) => {
+        $('#word-container').append(`<span class="word" data-word="${word}" style="font-size: 20px; padding: 2px">${word}</span>`);            		
+    	});    	    	    
+    });	
+    
+    document.addEventListener('click', function(event) {
+      $('.word').css({
+        'color': 'black',
+        'background-color': 'transparent'
+      });
+
+      
+      if(event.target.dataset.word) {
+        $(event.target).css({
+          'color': '#BF360C',
+          'background-color': '#EFEBE9',
+          'border-radius' : '4px',          
+        });
+      }
+
+      if (event.target && event.target.dataset.word) {        
+        var word = event.target.dataset.word;        
+        playSong(word.toLowerCase());
+      }
+    });
+
+    function playSong(word) {      
+      var audio = document.getElementById('audio');
+      audio.src = 'audios/' + word + '.ogg';
+      audio.play();
+    }
+  </script>
+
+</body>
+</html>
